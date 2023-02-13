@@ -1,0 +1,85 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Signin Account</h4>
+	<p>
+		<a href="" class="btn btn-block btn-twitter"> <i class="fab fa-twitter"></i>   Login via Twitter</a>
+		<a href="" class="btn btn-block btn-facebook"> <i class="fab fa-facebook-f"></i>   Login via facebook</a>
+	</p>
+	<p class="divider-text">
+		<span class="bg-light">OR</span>
+	</p>
+	{% for message in messages %}
+	<div class="alert alert-primary alert-dismissible fade show" role="alert">
+		<strong>Sorry!</strong> {{message}}.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		  <span aria-hidden="true">×</span>
+		</button>
+	</div>
+	{% endfor %}
+	<form action="" method="POST">
+		{% csrf_token %}
+		<div class="form-group input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+			 </div>
+			<input name="username" class="form-control" placeholder="User name" type="text">
+		</div>
+		<div class="form-group input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			</div>
+			<input name="password" class="form-control" placeholder="Create password" type="password">
+		</div>                             
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+		</div>
+		<p class="text-center">You Have no account? <a href="{% url 'signup' %}">Sign In</a> </p>                                                                 
+	</form>
+</article>
+<style>
+	#alert_msg{
+	 display: none;
+	 position: fixed;
+	 z-index: 10;
+	 top:0;
+	 right:0;
+	}
+	</style> 
+<style>
+
+	.divider-text {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;   
+    z-index: 2;
+}
+.divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #ffffff;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+}
+
+.btn-facebook {
+    background-color: #405D9D;
+    color: #ffffff;
+}
+.btn-twitter {
+    background-color: #42AEEC;
+    color: #fff;
+}
+</style>
