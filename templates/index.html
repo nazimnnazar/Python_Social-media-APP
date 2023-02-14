@@ -22,13 +22,49 @@
             </div>
             <div class="create">
                 <label for="creatPost" class="btn btn-primary" >update</label>
-                <div class="profile-phots">
+                <div class="profile-phots" onclick="settingsMenuToggle()">
                     <img src="{{user_profile.profileimg.url}}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="settings-menu">
+            <!-- --------------DARK MODE-------------- -->
+            <div id="dark-btn" class="dark-btn-on">
+                <span></span>
+            </div>
+            <!-- --------------END DARK MODE-------------- -->
+            <div class="settings-menu-inner">
+                <div class="user-profile">
+                    <div class="profile-phots">
+                        <img src="{{user_profile.profileimg.url}}">
+                    </div>
+                    <div>
+                        <p>{{user}}</p>
+                        <a href="#">See your profile</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="settings-links">
+                    <img src="{% static 'icon/setting.png' %}" class="settings-icon">
+                    <a href="#">Settings & Privacy </a>
+                </div>
+                <div class="settings-links">
+                    <img src="{% static 'icon/help.png' %}" class="settings-icon">
+                    <a href="#">Help & Support </a>
+                </div>
+                <div class="settings-links">
+                    <img src="{% static 'icon/display.png' %}" class="settings-icon">
+                    <a href="#">Display & Accessibility</a>
+                </div>
+                <div class="settings-links">
+                    <img src="{% static 'icon/logout.png' %}" class="settings-icon">
+                    <a href="#">Log Out </a>
                 </div>
             </div>
         </div>
     </nav>
     <!-- ................END NAV SECTION......................... -->
+
 
 
 
@@ -146,69 +182,29 @@
             </div>
             <!-- =======MAIN MID======= -->
             <div class="main-mid">  
-                <!-- storys..start.. -->
-                <!-- <div class="storys">
-                    <div class="story">
-                        <div class="profile-phots">
-                            <img src="{% static 'img/profile-1.jpeg' %}" alt="">
-                        </div>
-                        <p>your story</p>
-                    </div>
-                    <div class="story">
-                        <div class="profile-phots">
-                            <img src="{% static 'img/s2.jpg' %}" alt="">
-                        </div>
-                        <p>jami sia</p>
-                    </div>
-                    <div class="story">
-                        <div class="profile-phots">
-                            <img src="{% static 'img/s3.jpg' %}" alt="">
-                        </div>
-                        <p>newton</p>
-                    </div>
-                    <div class="story">
-                        <div class="profile-phots">
-                            <img src="{% static 'img/s4.jpg' %}" alt="">
-                        </div>
-                        <p>lana fox</p>
-                    </div>
-                    <div class="story">
-                        <div class="profile-phots">
-                            <img src="{% static 'img/s5.jpg' %}" alt="">
-                        </div>
-                        <p>albart joj</p>
-                    </div>
-                    <div class="story">
-                        <div class="profile-phots">
-                            <img src="{% static 'img/s6.jpg' %}" alt="">
-                        </div>
-                        <p>devid mark</p>
-                    </div>                
-                </div>                 -->
-                <!-- storys..end.. -->
                <!-- _______________UPLOAD PIC__________________________ -->
-                <form class="creatPost">
+                <form class="creatPost"  action="upload" method="POST" enctype="multipart/form-data">
                     <div class="profile-phots">
                         <img src="{{user_profile.profileimg.url}}" alt="">
                     </div>
-                   <div class="text-post">
-                      <input type="text" placeholder="whast's on your mind?" class="creatPost">
-                   </div>
-
-                   <div>
-                       <input type="submit" value="post" class="btn btn-primary">
-                   </div>
-                </form>
+                        {% csrf_token %}
+                    <div class="text-post">
+                        <input type="file" name="image_upload"><br>
+                        <input type="text" name="caption" placeholder="whast's on your mind?" class="creatPost"><br>
+                        <button class="btn btn-primary" type="submit" for="creatPost" class="btn btn-primary">Upload</button>
+                    </div>
+                 </form> 
                 <!--..................feeds..start...............................-->
                 <div class="feeds">
+                    {% for i in post %}
                     <div class="feed">
                         <div class="head">
                             <div class="user">
                                 <div class="profile-phots">
-                                    <img src="{% static 'img/p7.png' %}" alt="">                                    
+                                    <img src="{{user_profile.profileimg.url}}" alt="">                                    
                                 </div>
                                 <div class="info">
-                                    <h3>jhon milar</h3>
+                                    <h3>{{i.user}}</h3>
                                     <small>cannada, 15 minutes ago</small>
                                 </div>                               
                             </div>
@@ -217,7 +213,7 @@
                             </span>
                         </div>
                             <div class="feed-phots">
-                                <img src="{% static 'img/feed1.jpeg' %}" alt="">
+                                <img src="{{i.image.url}}" alt="">
                             </div>
                             <div class="action-buttons">
                                 <div class="inter-action-button">
@@ -236,284 +232,11 @@
                                 <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>                                                                  
                             </div>
                             <div class="caption">
-                                <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span class="hash-teg">#lifestyle</span></p>
+                                <p><b>angela rose.</b>{{i.caption}} <span class="hash-teg">#lifestyle</span></p>
                             </div> 
                             <div class="text-gry comment">view all comments</div> 
-                    </div> 
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-phots">
-                                    <img src="{% static 'img/p5.png' %}" alt="">                                    
-                                </div>
-                                <div class="info">
-                                    <h3>javed ali</h3>
-                                    <small>india, 15 minutes ago</small>
-                                </div>                               
-                            </div>
-                            <span class="edit">
-                                <img src="{% static 'icon/three-dots.svg' %}" class="icon1">
-                            </span>
-                        </div>
-                            <div class="feed-phots">
-                                <img src="{% static 'img/feed8.jpg' %}" alt="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="inter-action-button">
-                                    <span><img src="{% static 'icon/heart.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/chat-dots.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/share.svg' %}" class="icon2"></span>
-                                </div>
-                                <div class="book-mark">
-                                   <span><img src="{% static 'icon/bookmark.svg' %}" class="icon2"></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src="{% static 'img/p2.jpg' %}" alt=""></span>
-                                <span><img src="{% static 'img/p4.png' %}" alt=""></span>
-                                <span><img src="{% static 'img/p5.png' %}" alt=""></span>
-                                <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>                                                                  
-                            </div>
-                            <div class="caption">
-                                <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span class="hash-teg">#lifestyle</span></p>
-                            </div> 
-                            <div class="text-gry comment">view all comments</div> 
-                    </div>        
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-phots">
-                                    <img src="{% static 'img/feed4.jpg' %}" alt="">                                    
-                                </div>
-                                <div class="info">
-                                    <h3>liah joli</h3>
-                                    <small>america, updated profile</small>
-                                </div>                               
-                            </div>
-                            <span class="edit">
-                                <img src="{% static 'icon/three-dots.svg' %}" class="icon1">
-                            </span>
-                        </div>
-                            <div class="feed-phots">
-                                <img src="{% static 'img/feed4.jpg' %}" alt="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="inter-action-button">
-                                    <span><img src="{% static 'icon/heart.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/chat-dots.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/share.svg' %}" class="icon2"></span>
-                                </div>
-                                <div class="book-mark">
-                                   <span><img src="{% static 'icon/bookmark.svg' %}" class="icon2"></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src="{% static 'img/p2.jpg' %}" alt=""></span>
-                                <span><img src="{% static 'img/p4.png' %}" alt=""></span>
-                                <span><img src="{% static 'img/p5.png' %}" alt=""></span>
-                                <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>                                                                  
-                            </div>
-                            <div class="caption">
-                                <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span class="hash-teg">#lifestyle</span></p>
-                            </div> 
-                            <div class="text-gry comment">view all comments</div> 
-                    </div>
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-phots">
-                                    <img src="{% static 'img/p2.jpg' %}" alt="">                                    
-                                </div>
-                                <div class="info">
-                                    <h3>Deniel Rivar</h3>
-                                    <small>america, just now</small>
-                                </div>                               
-                            </div>
-                            <span class="edit">
-                                <img src="{% static 'icon/three-dots.svg' %}" class="icon1">
-                            </span>
-                        </div>
-                            <div class="feed-phots">
-                                <img src="{% static 'img/feed3.png' %}" alt="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="inter-action-button">
-                                    <span><img src="{% static 'icon/heart.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/chat-dots.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/share.svg' %}" class="icon2"></span>
-                                </div>
-                                <div class="book-mark">
-                                   <span><img src="{% static 'icon/bookmark.svg' %}" class="icon2"></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src="{% static 'img/p2.jpg' %}" alt=""></span>
-                                <span><img src="{% static 'img/p4.png' %}" alt=""></span>
-                                <span><img src="{% static 'img/p5.png' %}" alt=""></span>
-                                <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>                                                                  
-                            </div>
-                            <div class="caption">
-                                <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span class="hash-teg">#lifestyle</span></p>
-                            </div> 
-                            <div class="text-gry comment">view all comments</div> 
-                    </div>                   
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-phots">
-                                    <img src="{% static 'img/s1.jpg' %}" alt="">                                    
-                                </div>
-                                <div class="info">
-                                    <h3>mack since</h3>
-                                    <small>cannada, 15 minutes ago</small>
-                                </div>                               
-                            </div>
-                            <span class="edit">
-                                <img src="{% static 'icon/three-dots.svg' %}" class="icon1">
-                            </span>
-                        </div>
-                            <div class="feed-phots">
-                                <img src="{% static 'img/feed2.jpg' %}" alt="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="inter-action-button">
-                                    <span><img src="{% static 'icon/heart.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/chat-dots.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/share.svg' %}" class="icon2"></span>
-                                </div>
-                                <div class="book-mark">
-                                   <span><img src="{% static 'icon/bookmark.svg' %}" class="icon2"></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src="{% static 'img/p2.jpg' %}" alt=""></span>
-                                <span><img src="{% static 'img/p4.png' %}" alt=""></span>
-                                <span><img src="{% static 'img/p5.png' %}" alt=""></span>
-                                <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>                                                                  
-                            </div>
-                            <div class="caption">
-                                <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span class="hash-teg">#lifestyle</span></p>
-                            </div> 
-                            <div class="text-gry comment">view all comments</div> 
-                    </div>                  
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-phots">
-                                    <img src="{% static 'img/profile-4.jpg' %}" alt="">                                    
-                                </div>
-                                <div class="info">
-                                    <h3>chatrin dia</h3>
-                                    <small>cannada, 15 minutes ago</small>
-                                </div>                               
-                            </div>
-                            <span class="edit">
-                                <img src="{% static 'icon/three-dots.svg' %}" class="icon1">
-                            </span>
-                        </div>
-                            <div class="feed-phots">
-                                <img src="{% static 'img/feed6.png' %}" alt="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="inter-action-button">
-                                    <span><img src="{% static 'icon/heart.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/chat-dots.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/share.svg' %}" class="icon2"></span>
-                                </div>
-                                <div class="book-mark">
-                                   <span><img src="{% static 'icon/bookmark.svg' %}" class="icon2"></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src="{% static 'img/p2.jpg' %}" alt=""></span>
-                                <span><img src="{% static 'img/p4.png' %}" alt=""></span>
-                                <span><img src="{% static 'img/p5.png' %}" alt=""></span>
-                                <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>                                                                  
-                            </div>
-                            <div class="caption">
-                                <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span class="hash-teg">#lifestyle</span></p>
-                            </div> 
-                            <div class="text-gry comment">view all comments</div> 
-                    </div>         
-   
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-phots">
-                                    <img src="{% static 'img/p3.png' %}" alt="">                                    
-                                </div>
-                                <div class="info">
-                                    <h3>jhon milar</h3>
-                                    <small>cannada, 15 minutes ago</small>
-                                </div>                               
-                            </div>
-                            <span class="edit">
-                                <img src="{% static 'icon/three-dots.svg' %}" class="icon1">
-                            </span>
-                        </div>
-                            <div class="feed-phots">
-                                <img src="{% static 'img/feed7.jpg' %}" alt="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="inter-action-button">
-                                    <span><img src="{% static 'icon/heart.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/chat-dots.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/share.svg' %}" class="icon2"></span>
-                                </div>
-                                <div class="book-mark">
-                                   <span><img src="{% static 'icon/bookmark.svg' %}" class="icon2"></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src="{% static 'img/p2.jpg' %}" alt=""></span>
-                                <span><img src="{% static 'img/p4.png' %}" alt=""></span>
-                                <span><img src="{% static 'img/p5.png' %}" alt=""></span>
-                                <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>                                                                  
-                            </div>
-                            <div class="caption">
-                                <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span class="hash-teg">#lifestyle</span></p>
-                            </div> 
-                            <div class="text-gry comment">view all comments</div> 
-                    </div>  
-                    <div class="feed">
-                        <div class="head">
-                            <div class="user">
-                                <div class="profile-phots">
-                                    <img src="{% static 'img/s7.jpg' %}" alt="">                                    
-                                </div>
-                                <div class="info">
-                                    <h3>dr. lony</h3>
-                                    <small>cannada, 15 minutes ago</small>
-                                </div>                               
-                            </div>
-                            <span class="edit">
-                                <img src="{% static 'icon/three-dots.svg' %}" class="icon1">
-                            </span>
-                        </div>
-                            <div class="feed-phots">
-                                <img src="{% static 'img/feed5.jpeg' %}" alt="">
-                            </div>
-                            <div class="action-buttons">
-                                <div class="inter-action-button">
-                                    <span><img src="{% static 'icon/heart.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/chat-dots.svg' %}" class="icon2"></span>
-                                    <span><img src="{% static 'icon/share.svg' %}" class="icon2"></span>
-                                </div>
-                                <div class="book-mark">
-                                   <span><img src="{% static 'icon/bookmark.svg' %}" class="icon2"></span>
-                                </div>
-                            </div>
-                            <div class="liked-by">
-                                <span><img src="{% static 'img/p2.jpg' %}" alt=""></span>
-                                <span><img src="{% static 'img/p4.png' %}" alt=""></span>
-                                <span><img src="{% static 'img/p5.png' %}" alt=""></span>
-                                <p>like by <b>deniel rivar </b> and<b> 105 others pepoles</b></p>                                                                  
-                            </div>
-                            <div class="caption">
-                                <p><b>angela rose</b>Lorem, ipsum dolor sit amet consectetur. <span class="hash-teg">#lifestyle</span></p>
-                            </div> 
-                            <div class="text-gry comment">view all comments</div> 
-                    </div>                  
+                    </div>    
+                    {% endfor %}              
                 </div>
                 <!--..................feeds.end................................-->
             </div>
@@ -717,3 +440,70 @@
     <script src="{% static 'script.js' %}"></script>
 </body>
 </html>
+<style>
+    .settings-menu{
+    position: absolute;
+    width: 90%;
+    max-width: 300px;
+    background: white;
+    box-shadow: 0 0 10px rgb(198, 12, 204);
+    border-radius: 10px;
+    overflow: hidden;
+    top: 108%;
+    right: 0%;
+    max-height: 0;
+    transition: max-height 0.3s;
+}
+.settings-menu-height{
+    max-height: 450px;
+}
+.user-profile a{
+    font-size: 12px;
+    color: #a705c7;
+    text-decoration: none;
+}
+.settings-menu-inner{
+    padding: 20px;
+}
+.settings-menu hr{
+    border: 0;
+    height: 1px;
+    background: #9a9a9a;
+    margin: 15px 0;
+}
+.settings-links{
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+}
+.settings-links .settings-icon{
+    width: 38px;
+    margin-right: 10px;
+    border-radius: 50%;   
+}
+.settings-links a{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #626262;
+}
+
+.add-post-links{
+display: flex;
+margin-top: 10px;
+}
+.add-post-links a{
+text-decoration: none;
+display: flex;
+align-items: center;
+color: #626262;
+margin-right: 30px;
+font-size: 13px;
+}
+.add-post-links a img{
+width: 20px;
+margin-right: 10px;
+}
+</style>

@@ -38,6 +38,8 @@ body{
 
 /* ............CUSTOM STYLE........ */
 
+.post-conta
+
 .container{
     width: 80%;
     margin: 0 auto;
@@ -92,6 +94,7 @@ img{
 .text-gry{
     color: var(--color-gry);
 }
+/* ---------------------------------------------------- */
 
 /* ............................NAV START.................... */
 nav{

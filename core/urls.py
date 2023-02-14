@@ -7,5 +7,5 @@ urlpatterns = [
     path('signin/',views.signin,name='signin'),
     path('logout',views.logout,name='logout'),
     path('account_settings',views.account_settings,name='account_settings'),
-    path('upload_post',views.upload_post,name='upload_post'),
+    path('upload',views.upload,name='upload'),
 ]

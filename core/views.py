@@ -8,9 +8,12 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='signin')
 def home(request):
+    user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=request.user)
+    post = Post.objects.all()
     context = {
-        'user_profile':user_profile
+        'user_profile':user_profile,
+        'post':post,
     }
     return render(request,'index.html',context)
 
@@ -82,13 +85,15 @@ def account_settings(request):
         return redirect('account_settings')
     return render(request, 'core/settings.html',{'user_profile':user_profile})
 
-def upload_post(request):
+def upload(request):
     if request.method == 'POST':
         user = request.user.username
         image = request.FILES.get('image_upload')
-        caption = request.POST['captiom']
-        new_post = Post.objects.create(user=user,image=image,caption=caption)
+        caption = request.POST['caption']
+
+        new_post = Post.objects.create(user=user, image=image, caption=caption)
         new_post.save()
+
         return redirect('/')
     else:
         return redirect('/')

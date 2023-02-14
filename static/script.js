@@ -1,9 +1,9 @@
-//............SIDEBAR..........
-//............SIDEBAR..........
+var settingsmenu = document.querySelector(".settings-menu");
+
+function settingsMenuToggle(){
+    settingsmenu.classList.toggle("settings-menu-height");
+}
 const menuItem = document.querySelectorAll('.menu-item');
-
-
-// remove active classlist.....
 const removeActive = ()=>{
     menuItem.forEach(item => {
         item.classList.remove('active')        
