@@ -39,4 +39,7 @@ https://django-allauth.readthedocs.io/en/latest/installation.html#post-installat
 - To use other DB edit this https://github.com/Ronik22/Django_Social_Network_App/blob/main/myproject/settings.py#L107
 - To use other providers edit this https://github.com/Ronik22/Django_Social_Network_App/blob/main/myproject/settings.py#L205
 - To use redis instead edit this https://github.com/Ronik22/Django_Social_Network_App/blob/main/myproject/settings.py#L197
-
+## ScreenShort
+![Screenshot (322)](https://user-images.githubusercontent.com/112808009/219021436-e1184f59-4ca9-4684-9970-317c83251e00.png)
+![Screenshot (321)](https://user-images.githubusercontent.com/112808009/219021461-46d00882-6da2-4bad-8e09-121409ca02d2.png)
+![Screenshot (323)](https://user-images.githubusercontent.com/112808009/219021468-18efb61d-2114-4fae-b8b2-475c579e395d.png)
