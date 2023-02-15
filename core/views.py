@@ -97,3 +97,47 @@ def upload(request):
         return redirect('/')
     else:
         return redirect('/')
+    
+def like_post(request):
+    username = request.user.username
+    post_id = request.GET.get('post_id')
+    post = Post.objects.get(id=post_id)
+    like_filter = LikePost.objects.filter(post_id=post_id, username=username).first()
+    if like_filter == None:
+        new_like = LikePost.objects.create(post_id=post_id, username=username)
+        new_like.save()
+        post.no_of_likes = post.no_of_likes+1
+        post.save()
+        return redirect('/')
+    else:
+        like_filter.delete()
+        post.no_of_likes = post.no_of_likes-1
+        post.save()
+        return redirect('/')
+def profile(request,pk):
+    user_object = User.objects.get(username=pk)
+    user_profile = Profile.objects.get(user = user_object)
+    user_posts = Post.objects.filter(user=pk)
+    user_post_length = len(user_posts)
+    context= {
+        'user_object':user_object,
+        'user_profile':user_profile,
+        'user_posts':user_posts,
+        'user_post_length':user_post_length
+    }
+    return render(request,'core/profile.html',context)
+
+def follow(request):
+    if request.method == 'POST':
+        follower = request.POST['follower']
+        user = request.POST['user']
+        if FollowersConut.objects.filter(follower=follower,user=user).first():
+            delete_follower = FollowersConut.objects.get(follower=follower,user=user)
+            delete_follower.delete()
+            return redirect('/profile/'+user)
+        else:
+            new_follower = FollowersConut.objects.create(follower=follower,user=user)
+            new_follower.save()
+            return redirect('/profile/'+user)
+    else:
+        return redirect('/')

@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user_profile.user.username}}</title>
+    <!-- ................CUSTOM CSS LINK................... -->
+    <link rel="stylesheet" href="{% static 'profile.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'profiled.css' %}">
+</head>
+<body>
+    <!-- .............START NAV SECTION...................... -->
+    <nav>
+        <div class="container nav-container">
+            <h2 class="logo">
+                <a href="/">
+                    Capital<span>Hub</span>
+                </a>
+            </h2>
+        </div>
+    </nav>
+    <div class="profile-container">
+        <img src="{% static 'images/cover.png' %}" class="cover-img">
+        <div class="profile-details">
+            <div class="pd-left">
+                <div class="pd-row">
+                    <img src="{{user_profile.profileimg.url}}" class="pd-image">
+                    <div>
+                        <h3>{{user_profile.user.username}}</h3>
+                        <p>12 Friends -20 mutual</p>
+                        <br>
+                        <h5>{{user_profile.bio}}</h5>
+                        <br>
+                        {% if user_post_length == 0 %}
+                        <h5>No Post</h5>
+                        {% elif user_post_length == 1 %}
+                        <h5>Post:<b>{{user_post_length}}</b></h5>
+                        {% else %}
+                        <h5>Posts:<b>{{user_post_length}}</b></h5>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="pd-right">
+                <button type="button"><img src="{% static 'images/add-friends.png' %}">Friends</button>
+                <button type="button"><img src="{% static 'images/message.png' %}">Messages</button>
+                <br>
+                <a href=""><img src="{% static 'images/more.png' %}"></a>
+            </div>
+        </div>
+        <div class="profile-info">
+            <div class="info-col"></div>
+            <div class="post-col">
+                <h3>Photos</h3>
+                <br>
+                <!-- ------------------------- -->
+                {% for i in user_posts %}
+                <div class="feed">
+                    <div>
+                        <img src="{{i.image.url}}" class="feed-phots" >
+                    </div>
+                </div> 
+                {% endfor %}
+                <!-- --------------------------- -->
+            </div>
+        </div>
+    </div>
+    <!-- .............CUSTOM JS LINK...................... -->
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
+<style>
+    .feed{
+    /* padding: 20px 15%;
+    color: #626262; */
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+     display: flex;
+    align-items: flex-start;
+   justify-content: space-between;
+}
+.feed-phots{
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 14px;
+}
+    :root{
+    --color-white:hsl(252, 30%, 100%);
+    --color-light:hsl(252, 30%, 95%);
+    --color-gry:rgb(160, 151, 190);
+    --color-primary:hsl(286, 76%, 57%);
+    --color-success:hsl(120, 95%, 65%);
+    --color-danger:hsl(263, 96%, 65%);
+    --color-dark:hsl(252, 30%, 17%);
+    --color-black:hsl(252, 30%, 10%);
+
+
+    --btn-padding:.6rem 2rem;
+    --border-radius:0;
+    --card-border-radius:0;
+    --search-padding:.6rem 2rem;
+    --card-padding:1rem;
+
+    --stk-top-left:5.4rem;
+    --stk-top-right:-18rem;
+}
+/* ...................feed start............ */
+.feeds .feed{
+    background: var(--color-white);
+    font-size: .8rem;
+    line-height: 1.6;
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin: 1rem 0;
+}
+.feeds .feed .head{
+    display: flex;
+    justify-content: space-between;
+}
+.feeds .feed .user{
+    display: flex;
+    gap: 1rem; 
+}
+.feeds .feed-phots{
+    overflow: hidden;
+    border-radius: var(--card-border-radius);
+    margin: .7rem 0;
+}
+.feeds .action-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin: .6rem 0;
+    align-items: center;
+}
+.feeds .inter-action-button{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.liked-by{
+    display: flex;
+    margin-top: .8rem;
+}
+.liked-by span{
+    height: 1.4rem;
+    width: 1.4rem;
+    border: 2px solid var(--color-white);
+    border-radius: 50%;
+    display: block;
+    overflow: hidden;
+    margin-left: -.6rem;
+}
+.liked-by span:nth-child(1){
+    margin: 0;
+}
+.liked-by p{
+    margin-left: .6rem;
+}
+.hash-teg{
+    color: var(--color-primary);
+}
+/* ...................feed end............ */
+</style>
