@@ -1,7 +1,7 @@
 # Python_Social-media-APP
 
 
-A social media web-application with Python Django .
+A social media web-application with Python Django.
 ## Installation
 
 ```bash
