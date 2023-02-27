@@ -14,6 +14,7 @@ A social media web-application with Python Django.
     (venv) python manage.py createsuperuser
     (venv) python manage.py runserver
 ```
+
 ## Features :
 <li>Create, Edit, Delete Posts with customized text, pictures and links</li>
 <li>Like, Comment / Reply, Save and Search posts</li>
