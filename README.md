@@ -26,10 +26,6 @@ A social media web-application with Python Django.
 <li>Video Calls</li>
 
 
-
-
-
-
 ## Add django-allauth config
 
 https://django-allauth.readthedocs.io/en/latest/installation.html#post-installation
